@@ -1,4 +1,4 @@
-package de.az82.demo.osmquarkus;
+package de.az82.demo.osmquarkus.security;
 
 import io.quarkus.logging.Log;
 import io.quarkus.oidc.runtime.OidcJwtCallerPrincipal;

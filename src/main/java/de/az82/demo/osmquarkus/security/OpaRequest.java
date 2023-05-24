@@ -1,5 +1,6 @@
-package de.az82.demo.osmquarkus;
+package de.az82.demo.osmquarkus.security;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,7 +20,7 @@ record OpaRequest(Input input) {
      * @param headers   HTTP headers
      * @param principal Spring Security authentication principal (e.g. user name)
      */
-    record Input(String method, String path, Map<String, String> headers, String principal) {
+    record Input(String method, String path, Map<String, List<String>> headers, String principal) {
     }
 
 }

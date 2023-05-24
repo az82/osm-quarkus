@@ -1,4 +1,4 @@
-package de.az82.demo.osmquarkus;
+package de.az82.demo.osmquarkus.security;
 
 import io.quarkus.logging.Log;
 import io.quarkus.security.identity.SecurityIdentity;
@@ -10,7 +10,9 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -68,11 +70,22 @@ public class OpaHttpSecurityPolicy implements HttpSecurityPolicy {
         );
     }
 
-    private static Map<String, String> flattenHeaders(MultiMap headers) {
-        var result = new HashMap<String, String>();
+    private static String getPrincipalName(SecurityIdentity identity) {
+        // The principal name may be:
+        // - "" if the identity is anonymous
+        // - null if the identity is present, but the user name has not been properly populated
+        // For better security we unify these two cases into null
+        return !identity.isAnonymous()
+                ? identity.getPrincipal().getName()
+                : null;
+    }
+
+    private static Map<String, List<String>> makeSerializable(MultiMap headers) {
+        var result = new HashMap<String, List<String>>();
 
         for (Map.Entry<String, String> entry : headers) {
-            result.put(entry.getKey(), entry.getValue());
+            result.computeIfAbsent(entry.getKey(), k -> new ArrayList<>())
+                    .add(entry.getValue());
         }
 
         return result;

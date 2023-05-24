@@ -1,4 +1,4 @@
-package de.az82.demo.osmquarkus;
+package de.az82.demo.osmquarkus.security;
 
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;

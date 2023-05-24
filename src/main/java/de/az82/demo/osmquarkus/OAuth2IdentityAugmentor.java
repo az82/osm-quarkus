@@ -14,11 +14,11 @@ import java.util.Objects;
 
 /**
  * Identity augmentor for non-OIDC compliant OAuth2 providers.
- *
+ * <p>
  * If Quarkus uses a non-OIDC compliant OAuth2 provider that does not provide an Id token, Quarkus will create a
  * "virtual" Id token. In this case, Quarkus calls the userinfo endpoint of the provider, but does not populate the Id
  * token with user information.
- *
+ * <p>
  * This augmentor populates the Id token with information from the userinfo endpoint.
  */
 @ApplicationScoped

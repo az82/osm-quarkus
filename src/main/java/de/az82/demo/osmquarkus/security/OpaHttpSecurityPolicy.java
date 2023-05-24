@@ -39,8 +39,8 @@ public class OpaHttpSecurityPolicy implements HttpSecurityPolicy {
                     var request = routingContext.request();
                     var method = request.method().name();
                     var path = request.path();
-                    var headers = flattenHeaders(request.headers());
-                    var principal = identity.getPrincipal().getName();
+                    var headers = makeSerializable(request.headers());
+                    var principal = getPrincipalName(identity);
 
                     return Uni.createFrom().completionStage(
                             opaRestClient.allow(new OpaRequest(new OpaRequest.Input(

@@ -8,6 +8,7 @@ For local build and run:
 
 * Java 17+
 * [opa](https://github.com/open-policy-agent/opa)
+* [conftest](https://github.com/open-policy-agent/conftest) for validating the application configuration
 
 ### Configuration
 
@@ -59,6 +60,12 @@ env $(cat .env | xargs) ./mvnw compile quarkus:dev
 ```
 
 The server will be listening at http://localhost:8080
+
+## Validate the Application Configuration
+
+```bash
+conftest -p src/main/rego/config-policy.rego test src/main/resources/application.yaml
+```
 
 ## Copyright & License
 

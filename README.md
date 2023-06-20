@@ -67,6 +67,11 @@ The server will be listening at http://localhost:8080
 conftest -p src/main/rego/config-policy.rego test src/main/resources/application.yaml
 ```
 
+To see how *conftest* parses the configuration file, use:
+```bash
+conftest parse src/main/resources/application.properties 
+```
+
 ## Copyright & License
 
 Copyright 2023 Andreas Zitzelsberger, released under the [MIT License](LICENSE).

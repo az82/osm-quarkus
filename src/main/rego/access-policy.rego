@@ -21,22 +21,8 @@ bad_strings := {
 
 default allow := false
 
-# Allow unauthenticated access to anon_paths
-allow {
-    glob.match(anon_paths[_], ["/"], input.path)
-}
+# 1. Add a rule to allow unauthenticated access to anon_paths
 
-# Allow authenticated access to auth_paths
-allow {
-    # Allow authenticated access to pre-defined paths
-    input.principal != null
-    glob.match(auth_paths[_], ["/"], input.path)
+# 2. Add a rule to allow authenticated access to auth_paths
 
-    # Only allow requests with query strings that do not contain any bad words
-    not contains_bad_words
-}
-
-# Tells whether the query string contains one of the bad words
-contains_bad_words {
-    contains(lower(input.query), bad_strings[_])
-}
+# 3. Extend the rule to only allow requests with query strings that do not contain any bad words

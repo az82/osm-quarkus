@@ -39,6 +39,7 @@ public class OpaHttpSecurityPolicy implements HttpSecurityPolicy {
                     var request = routingContext.request();
                     var method = request.method().name();
                     var path = request.path();
+                    var query = request.query();
                     var headers = makeSerializable(request.headers());
                     var principal = getPrincipalName(identity);
 
@@ -46,6 +47,7 @@ public class OpaHttpSecurityPolicy implements HttpSecurityPolicy {
                             opaRestClient.allow(new OpaRequest(new OpaRequest.Input(
                                             method,
                                             path,
+                                            query,
                                             headers,
                                             principal
                                     )))

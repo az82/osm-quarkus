@@ -17,10 +17,11 @@ record OpaRequest(Input input) {
      *
      * @param method    HTTP method
      * @param path      HTTP request path
+     * @param query     HTTP query
      * @param headers   HTTP headers
      * @param principal Spring Security authentication principal (e.g. user name)
      */
-    record Input(String method, String path, Map<String, List<String>> headers, String principal) {
+    record Input(String method, String path, String query, Map<String, List<String>> headers, String principal) {
     }
 
 }
